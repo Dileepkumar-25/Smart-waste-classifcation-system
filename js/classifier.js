@@ -307,6 +307,11 @@ class WasteClassifier {
         window.EcoAnalytics.recordClassification(classificationResult);
       }
 
+      // Update Smart Dustbin composition and percentage tracker
+      if (window.DustbinMonitor) {
+        window.DustbinMonitor.addItem(classificationResult.categoryId, classificationResult.itemName);
+      }
+
       window.EcoApp.showNotification(`Classified as: ${classificationResult.categoryName} (${classificationResult.confidence}% confidence)`, 'success');
 
     } catch (err) {

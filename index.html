@@ -68,6 +68,10 @@
           <i data-lucide="bar-chart-3"></i>
           <span>Analytics & Impact</span>
         </a>
+        <a href="#dustbin" class="nav-item" data-view-target="dustbin">
+          <i data-lucide="trash-2"></i>
+          <span>Smart Dustbin AI</span>
+        </a>
 
         <div class="nav-section-title">Community & Tools</div>
         <a href="#map" class="nav-item" data-view-target="map">
@@ -495,6 +499,11 @@
                     Identified as single-use recyclable polyethylene terephthalate container. Follow municipal guidelines for optimal processing.
                   </p>
 
+                  <!-- Real-time Dustbin Composition Indicator -->
+                  <div id="result-bin-composition-notice" class="bin-composition-alert">
+                    <i data-lucide="pie-chart"></i> Smart Bin Status: <strong>Updated with scanned item</strong>
+                  </div>
+
                   <!-- Impact Metrics Row -->
                   <div class="impact-pills-row">
                     <div class="impact-pill">
@@ -694,6 +703,138 @@
 
 
         <!-- ===============================================================
+             VIEW 4.5: SMART DUSTBIN COMPOSITION & DOMINANCE PREDICTOR
+             =============================================================== -->
+        <section id="view-dustbin" class="app-view">
+          
+          <div class="dustbin-view-header">
+            <div class="section-header" style="text-align: left; margin: 0 0 16px 0;">
+              <span class="section-tag">IoT & AI Prediction Engine</span>
+              <h2 class="section-title">Smart Dustbin Waste Composition Predictor</h2>
+              <p class="section-subtitle">Real-time prediction of which waste category is dominant in your dustbin, fill percentage tracking, and compaction alerts.</p>
+            </div>
+
+            <!-- Controls Bar -->
+            <div class="dustbin-controls-bar">
+              <div class="dustbin-select-wrap">
+                <label for="dustbin-size-select" class="text-xs font-semibold" style="color:var(--text-muted);">Bin Model:</label>
+                <select id="dustbin-size-select" class="dustbin-select">
+                  <option value="home">🏠 Home Kitchen Bin (30 Liters)</option>
+                  <option value="office">🏢 Office Shared Bin (60 Liters)</option>
+                  <option value="public">🌆 Smart Solar Public Bin (120 Liters)</option>
+                </select>
+              </div>
+
+              <div class="dustbin-action-btns">
+                <button type="button" id="dustbin-simulate-btn" class="btn btn-outline btn-sm">
+                  <i data-lucide="sparkles"></i> Simulate Mixed Fill
+                </button>
+                <button type="button" id="dustbin-reset-btn" class="btn btn-outline btn-sm">
+                  <i data-lucide="rotate-ccw"></i> Empty Dustbin
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Layout Grid -->
+          <div class="dustbin-main-grid mt-4">
+            
+            <!-- Left Column: Dominant Waste & 3D Container -->
+            <div class="dustbin-left-col">
+              
+              <!-- Dominant Waste Card -->
+              <div id="dustbin-dominant-card" class="dustbin-dominant-card">
+                <div class="d-dom-header">
+                  <span id="dustbin-dominant-badge" class="guide-badge">Most Prevalent (Highest %)</span>
+                  <span class="d-dom-alert-icon">🔥 Highest Volume</span>
+                </div>
+
+                <div class="d-dom-body">
+                  <div class="d-dom-text">
+                    <div class="d-dom-label">Dominant Waste in Bin:</div>
+                    <h3 id="dustbin-dominant-name" class="d-dom-title">Plastic Material</h3>
+                  </div>
+                  <div id="dustbin-dominant-percent" class="d-dom-big-percent">40.0%</div>
+                </div>
+
+                <p id="dustbin-dominant-advice" class="d-dom-advice">
+                  Plastic represents 40.0% of the bin. Flatten and compress bottles to reduce occupied volume by 35% before collection.
+                </p>
+              </div>
+
+              <!-- 3D Cylindrical Dustbin Visual Container -->
+              <div class="dustbin-visual-card">
+                <div class="dustbin-visual-title">
+                  <i data-lucide="layers"></i> Inside Dustbin (Waste Strata)
+                </div>
+                <div class="dustbin-canister-outer">
+                  <div class="dustbin-canister-lid"></div>
+                  <div class="dustbin-canister-body">
+                    <div id="dustbin-strata-container" class="dustbin-strata-container">
+                      <!-- Stacked color layers inserted dynamically -->
+                    </div>
+                  </div>
+                  <div class="dustbin-canister-base"></div>
+                </div>
+                <div class="dustbin-visual-footer text-center text-xs mt-2" style="color:var(--text-muted); text-align:center;">
+                  Live visualization of volume occupied by material stream
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Column: Fill Gauge & Full Percentages Breakdown -->
+            <div class="dustbin-right-col">
+              
+              <!-- Fill Level Gauge Card -->
+              <div class="dustbin-gauge-card">
+                <div class="dg-header">
+                  <div>
+                    <h4 class="font-bold text-base">Overall Fill Level</h4>
+                    <span id="dustbin-total-count" class="text-xs" style="color:var(--text-muted);">35 Items Logged</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <span id="dustbin-status-pill" class="dustbin-status-pill">Near Capacity</span>
+                    <span id="dustbin-fill-percent" class="text-2xl font-black" style="font-size:24px; font-weight:800; color:var(--color-emerald-primary);">74%</span>
+                  </div>
+                </div>
+                <div class="dg-track">
+                  <div id="dustbin-fill-bar" class="dg-fill" style="width: 74%;"></div>
+                </div>
+              </div>
+
+              <!-- Full Percentage Breakdown List -->
+              <div class="dustbin-breakdown-card">
+                <div class="dbr-title-row">
+                  <h4 class="font-bold text-base">Waste Percentage Breakdown</h4>
+                  <span class="text-xs" style="color:var(--text-muted);">Calculated by AI Classifier</span>
+                </div>
+                
+                <div id="dustbin-breakdown-list" class="dustbin-breakdown-container">
+                  <!-- Populated dynamically by bin-monitor.js -->
+                </div>
+              </div>
+
+              <!-- Predictive Insights Box -->
+              <div class="dustbin-insights-card">
+                <h5 class="font-bold text-sm flex items-center gap-2 mb-2" style="display:flex; align-items:center; gap:6px; margin-bottom:8px;">
+                  <i data-lucide="brain-circuit" class="text-emerald-600" style="color:var(--color-emerald-primary);"></i> AI Smart Collection Advisory
+                </h5>
+                <ul class="dustbin-insights-list" style="list-style:none; display:flex; flex-direction:column; gap:6px; font-size:12px; color:var(--text-muted);">
+                  <li><strong>• Dominance Alert:</strong> When dominant waste exceeds 45%, segregation purity drops due to cross-contamination risk.</li>
+                  <li><strong>• Compaction Tip:</strong> Stacking paper and crushing metal cans delays overflow by up to 2.4 days.</li>
+                  <li><strong>• Auto-sync:</strong> Every time you scan an item in the AI Classifier, this dustbin model updates automatically!</li>
+                </ul>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ===============================================================
              VIEW 5: DROP-OFF LOCATOR DIRECTORY
              =============================================================== -->
         <section id="view-map" class="app-view">
@@ -866,6 +1007,7 @@
   <script src="./js/knowledge-base.js"></script>
   <script src="./js/analytics.js"></script>
   <script src="./js/quiz.js"></script>
+  <script src="./js/bin-monitor.js"></script>
   <script src="./js/classifier.js"></script>
   <script src="./js/app.js"></script>
 </body>

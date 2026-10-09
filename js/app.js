@@ -499,6 +499,9 @@ document.addEventListener('DOMContentLoaded', () => {
   window.EcoClassifier = new WasteClassifier();
   window.EcoAnalytics = new EcoAnalytics();
   window.EcoQuizInstance = new EcoQuiz();
+  if (typeof DustbinMonitor !== 'undefined') {
+    window.DustbinMonitor = new DustbinMonitor();
+  }
 
   if (window.lucide) {
     window.lucide.createIcons();
