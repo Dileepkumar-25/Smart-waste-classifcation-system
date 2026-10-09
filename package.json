@@ -1,0 +1,20 @@
+{
+  "name": "ecosort-ai-smart-waste-classifier",
+  "version": "1.0.0",
+  "description": "EcoSort AI – Smart Waste Classification System with AI computer vision, real-time webcam scanner, recycling guide, and impact analytics.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "ai",
+    "waste-classification",
+    "recycling",
+    "sustainability",
+    "tensorflow-js",
+    "mobilenet"
+  ],
+  "author": "EcoSort AI Team",
+  "license": "MIT"
+}

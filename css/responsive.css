@@ -1,0 +1,223 @@
+/* ===================================================================
+   EcoSort AI - Responsive Layout & Breakpoints
+   =================================================================== */
+
+/* Tablet & Smaller Laptops (<= 1024px) */
+@media (max-width: 1024px) {
+  .hero-section {
+    grid-template-columns: 1fr;
+    padding: 32px;
+    gap: 28px;
+  }
+
+  .hero-visual-card {
+    max-height: 380px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .category-preview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .guide-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-photo-img {
+    height: 240px;
+  }
+
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-pills-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablets (<= 768px) */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 260px;
+  }
+
+  /* Make sidebar off-canvas */
+  .app-sidebar {
+    transform: translateX(-100%);
+    box-shadow: none;
+  }
+
+  .app-sidebar.open {
+    transform: translateX(0);
+    box-shadow: 10px 0 25px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Mobile menu button visible */
+  .mobile-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .app-main {
+    margin-left: 0;
+  }
+
+  .app-topbar {
+    padding: 0 16px;
+  }
+
+  .app-content {
+    padding: 18px;
+  }
+
+  .hero-title {
+    font-size: 30px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .locator-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-cta-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 20px;
+    gap: 20px;
+  }
+
+  .guide-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .guide-search-wrap {
+    max-width: 100%;
+  }
+
+  .dodonts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .classifier-toolbar {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .classifier-toolbar .btn {
+    width: 100%;
+  }
+
+  .app-footer {
+    flex-direction: column;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .history-table th:nth-child(4),
+  .history-table td:nth-child(4) {
+    display: none;
+  }
+}
+
+/* Mobile Screens (<= 480px) */
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 20px 16px;
+  }
+
+  .hero-title {
+    font-size: 26px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-preview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .classifier-card {
+    padding: 20px 16px;
+  }
+
+  .drop-zone {
+    padding: 24px 12px;
+    min-height: 220px;
+  }
+
+  .results-card {
+    padding: 20px 16px;
+  }
+
+  .impact-pills-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .result-actions-bar {
+    flex-direction: column;
+  }
+
+  .result-actions-bar .btn {
+    width: 100%;
+  }
+
+  .modal-card {
+    padding: 20px 16px;
+  }
+
+  .modal-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dodont-split {
+    grid-template-columns: 1fr;
+  }
+
+  .toast {
+    min-width: unset;
+    width: calc(100vw - 32px);
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+/* Backdrop for Mobile Sidebar */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 95;
+}
+
+.sidebar-backdrop.open {
+  display: block;
+}
